@@ -18,7 +18,8 @@ def emotion_detector():
 
     # Call the emotion detection function
     emotion_result = EM.emotion_detector(text_to_analyze)
-    return jsonify(emotion_result)  # Return the result as JSON
+    print(emotion_result)
+    return emotion_result
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=5000, debug=True)
