@@ -17,9 +17,23 @@ def emotion_detector():
         return jsonify({"error": "No text provided"}), 400
 
     # Call the emotion detection function
-    emotion_result = EM.emotion_detector(text_to_analyze)
-    print(emotion_result)
-    return emotion_result
+    emotionData = EM.emotion_detector(text_to_analyze)
+    print(emotionData)
+
+    if emotionData['dominant_emotion'] is None:
+        return "Invalid Text, please try again!"
+    else:
+        out_message = f"""
+            For the given statement, the system response is:
+            - Anger: {emotionData['anger']}
+            - Disgust: {emotionData['disgust']}
+            - Fear: {emotionData['fear']}
+            - Joy: {emotionData['joy']}
+            - Sadness: {emotionData['sadness']}
+            The dominant emotion is: {emotionData['dominant_emotion']}
+            """
+        print(out_message)
+        return out_message
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=5000, debug=True)
